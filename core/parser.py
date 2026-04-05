@@ -23,7 +23,7 @@ from typing import Optional
 
 from core.models import ParsedHTTPRequest
 
-logger = logging.getLogger("burpai.parser")
+logger = logging.getLogger("vectraforge.parser")
 
 
 class HTTPRequestParser:

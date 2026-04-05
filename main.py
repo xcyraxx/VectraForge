@@ -1,5 +1,5 @@
 """
-BurpAI Server — Main Entry Point
+VectraForge Server — Main Entry Point
 =================================
 Local AI-powered HTTP vulnerability analysis server.
 Receives raw HTTP requests from Burp Suite extensions and returns
@@ -20,7 +20,7 @@ from utils.logger import setup_logging
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="BurpAI — Local LLM HTTP Vulnerability Analysis Server"
+        description="VectraForge — Local LLM HTTP Vulnerability Analysis Server"
     )
     parser.add_argument("--host", default="127.0.0.1", help="Bind host (default: 127.0.0.1)")
     parser.add_argument("--port", type=int, default=8000, help="Bind port (default: 8000)")
@@ -34,9 +34,9 @@ def main():
     args = parse_args()
     setup_logging(args.log_level.upper())
 
-    logger = logging.getLogger("burpai.main")
+    logger = logging.getLogger("vectraforge.main")
     logger.info("=" * 60)
-    logger.info("  BurpAI Server starting up")
+    logger.info("  VectraForge Server starting up")
     logger.info(f"  Listening on http://{args.host}:{args.port}")
     logger.info(f"  Workers: {args.workers}")
     logger.info("=" * 60)

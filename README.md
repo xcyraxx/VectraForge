@@ -1,4 +1,4 @@
-# BurpAI — Local LLM HTTP Vulnerability Analysis Server
+# VectraForge — Local LLM HTTP Vulnerability Analysis Server
 
 > **For authorized security research and penetration testing only.**
 > Only use against systems you own or have explicit written permission to test.
@@ -15,7 +15,7 @@ HTTP requests — fully offline, no cloud services.
 ┌─────────────────────────────────────────────────────────────┐
 │  Burp Suite (Parrot OS)                                      │
 │  ┌──────────────────────────────────┐                        │
-│  │  BurpAI Jython Extension         │                        │
+│  │  VectraForge Jython Extension         │                        │
 │  │  • Context menu hook             │                        │
 │  │  • Request serializer            │                        │
 │  │  • Results UI (tabbed panel)     │                        │
@@ -25,7 +25,7 @@ HTTP requests — fully offline, no cloud services.
                   │  { raw_request, target_host, is_https }
                   ▼
 ┌─────────────────────────────────────────────────────────────┐
-│  BurpAI FastAPI Server (Manjaro / any Linux host)           │
+│  VectraForge FastAPI Server (Manjaro / any Linux host)           │
 │                                                              │
 │  ┌─────────────┐    ┌─────────────┐    ┌─────────────────┐  │
 │  │   Parser    │───▶│  Prompt     │───▶│   Ollama        │  │
@@ -54,7 +54,7 @@ HTTP requests — fully offline, no cloud services.
 ## Folder Structure
 
 ```
-burp-ai-server/
+vectra-forge-server/
 ├── main.py                     # Entry point — starts uvicorn
 ├── requirements.txt
 ├── .env.example                # Config template
@@ -77,12 +77,12 @@ burp-ai-server/
 │   └── logger.py               # Logging setup (console + rotating file)
 │
 ├── burp_extension/
-│   └── BurpAIExtension.py      # Jython Burp Suite extension
+│   └── VectraForgeExtension.py      # Jython Burp Suite extension
 │
 ├── tests/
 │   └── test_parser.py          # Parser unit tests
 │
-└── logs/                       # Auto-created — burpai.log + audit.log
+└── logs/                       # Auto-created — vectraforge.log + audit.log
 ```
 
 ---
@@ -153,9 +153,9 @@ python main.py --reload --log-level debug
 
 The server will start and print startup info:
 ```
-2024-01-15 10:23:11 INFO  burpai.main: BurpAI Server starting up
-2024-01-15 10:23:11 INFO  burpai.main: Listening on http://127.0.0.1:8000
-2024-01-15 10:23:12 INFO  burpai.app:  Ollama connection OK
+2024-01-15 10:23:11 INFO  vectraforge.main: VectraForge Server starting up
+2024-01-15 10:23:11 INFO  vectraforge.main: Listening on http://127.0.0.1:8000
+2024-01-15 10:23:12 INFO  vectraforge.app:  Ollama connection OK
 ```
 
 ---
@@ -164,14 +164,14 @@ The server will start and print startup info:
 
 1. In Burp Suite go to: **Extender > Extensions > Add**
 2. Set Extension type: **Python**
-3. Select: `burp_extension/BurpAIExtension.py`
-4. Go to the **BurpAI** tab that appears in Burp's main panel
+3. Select: `burp_extension/VectraForgeExtension.py`
+4. Go to the **VectraForge** tab that appears in Burp's main panel
 
 **Using the extension:**
 1. In Proxy History, right-click any request
-2. Select **"Analyze with BurpAI"**
+2. Select **"Analyze with VectraForge"**
 3. Wait 10–60 seconds for DeepSeek-R1 to analyze
-4. Results appear in the BurpAI tab across 5 sub-tabs:
+4. Results appear in the VectraForge tab across 5 sub-tabs:
    - **Summary** — risk score, surface overview
    - **Vulns** — detailed findings with CWE/OWASP refs
    - **Payloads** — ready-to-use attack payloads

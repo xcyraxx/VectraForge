@@ -62,7 +62,7 @@ def setup_logging(level: str = "INFO", log_dir: str = "logs") -> None:
 
     # Rotating main log file
     main_file = logging.handlers.RotatingFileHandler(
-        filename=os.path.join(log_dir, "burpai.log"),
+        filename=os.path.join(log_dir, "vectraforge.log"),
         maxBytes=10 * 1024 * 1024,  # 10 MB
         backupCount=5,
         encoding="utf-8",
@@ -88,7 +88,7 @@ def setup_logging(level: str = "INFO", log_dir: str = "logs") -> None:
     root.addHandler(main_file)
 
     # ── Audit logger ──────────────────────────────────────────────────────────
-    audit_logger = logging.getLogger("burpai.audit")
+    audit_logger = logging.getLogger("vectraforge.audit")
     audit_logger.addHandler(audit_file)
     audit_logger.propagate = False  # Don't double-log to root
 

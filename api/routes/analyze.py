@@ -18,7 +18,7 @@ from core.parser import HTTPRequestParser
 from core.analyzer import VulnerabilityAnalyzer
 from core.models import AnalysisRequest, AnalysisResponse
 
-logger = logging.getLogger("burpai.routes.analyze")
+logger = logging.getLogger("vectraforge.routes.analyze")
 router = APIRouter()
 
 
@@ -173,7 +173,7 @@ async def analyze_batch(
 
 def _log_result_summary(request_id: str, method: str, url: str, vuln_count: int, risk: float):
     """Background task: write a one-line summary to the audit log."""
-    audit_logger = logging.getLogger("burpai.audit")
+    audit_logger = logging.getLogger("vectraforge.audit")
     audit_logger.info(
         f"[{request_id}] {method} {url} | vulns={vuln_count} | risk_score={risk}"
     )

@@ -16,13 +16,13 @@ from fastapi.responses import JSONResponse
 from api.routes import analyze, health
 from core.config import Settings
 
-logger = logging.getLogger("burpai.app")
+logger = logging.getLogger("vectraforge.app")
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Startup / shutdown lifecycle handler."""
-    logger.info("BurpAI server starting — warming up Ollama connection...")
+    logger.info("VectraForge server starting — warming up Ollama connection...")
     # Import here to avoid circular deps at module load time
     from core.llm_client import OllamaClient
     client = OllamaClient()
@@ -32,7 +32,7 @@ async def lifespan(app: FastAPI):
     else:
         logger.warning("Ollama unreachable — analysis requests will fail until it comes online")
     yield
-    logger.info("BurpAI server shutting down")
+    logger.info("VectraForge server shutting down")
 
 
 def create_app() -> FastAPI:
@@ -40,7 +40,7 @@ def create_app() -> FastAPI:
     settings = Settings()
 
     app = FastAPI(
-        title="BurpAI — Local HTTP Vulnerability Analysis",
+        title="VectraForge — Local HTTP Vulnerability Analysis",
         description=(
             "Receives raw HTTP requests from Burp Suite extensions and returns "
             "structured vulnerability analysis via a local Ollama LLM."

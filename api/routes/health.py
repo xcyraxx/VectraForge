@@ -9,14 +9,14 @@ from fastapi.responses import JSONResponse
 from core.llm_client import OllamaClient
 from core.config import Settings
 
-logger = logging.getLogger("burpai.routes.health")
+logger = logging.getLogger("vectraforge.routes.health")
 router = APIRouter()
 
 
 @router.get("/health", summary="Server health check")
 async def health() -> JSONResponse:
     """Basic liveness probe — returns 200 if the server is running."""
-    return JSONResponse({"status": "ok", "service": "BurpAI"})
+    return JSONResponse({"status": "ok", "service": "VectraForge"})
 
 
 @router.get("/health/full", summary="Full health check including Ollama")
@@ -38,7 +38,7 @@ async def health_full() -> JSONResponse:
         status_code=code,
         content={
             "status": status,
-            "service": "BurpAI",
+            "service": "VectraForge",
             "ollama": {
                 "reachable": ollama_ok,
                 "model": settings.ollama_model,
@@ -52,7 +52,7 @@ async def health_full() -> JSONResponse:
 @router.get("/", summary="Root — API info")
 async def root() -> JSONResponse:
     return JSONResponse({
-        "service": "BurpAI Local Vulnerability Analysis Server",
+        "service": "VectraForge Local Vulnerability Analysis Server",
         "version": "1.0.0",
         "endpoints": {
             "POST /analyze": "Analyze a single HTTP request",

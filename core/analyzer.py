@@ -32,7 +32,7 @@ from core.models import (
 )
 from core.prompt_builder import PromptBuilder
 
-logger = logging.getLogger("burpai.analyzer")
+logger = logging.getLogger("vectraforge.analyzer")
 
 
 class VulnerabilityAnalyzer:

@@ -20,7 +20,7 @@ import httpx
 
 from core.config import Settings
 
-logger = logging.getLogger("burpai.llm_client")
+logger = logging.getLogger("vectraforge.llm_client")
 
 
 class OllamaClient:

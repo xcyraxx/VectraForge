@@ -15,7 +15,7 @@ from typing import Optional
 
 from core.models import ParsedHTTPRequest
 
-logger = logging.getLogger("burpai.prompt_builder")
+logger = logging.getLogger("vectraforge.prompt_builder")
 
 
 # ── JSON Schema embedded in the prompt ───────────────────────────────────────

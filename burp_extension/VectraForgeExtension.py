@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 """
-BurpAI Extension for Burp Suite (Jython 2.7)
+VectraForge Extension for Burp Suite (Jython 2.7)
 =============================================
-Adds "Analyze with BurpAI" to the right-click context menu.
-Sends the selected request to the local BurpAI server and
+Adds "Analyze with VectraForge" to the right-click context menu.
+Sends the selected request to the local VectraForge server and
 displays results in a dedicated Burp tab.
 
 INSTALLATION:
@@ -12,7 +12,7 @@ INSTALLATION:
 
 REQUIREMENTS:
   - Jython 2.7+
-  - BurpAI server running (python main.py --host 0.0.0.0 --port 8000)
+  - VectraForge server running (python main.py --host 0.0.0.0 --port 8000)
 """
 
 from burp import IBurpExtender, IContextMenuFactory, ITab
@@ -38,16 +38,16 @@ class BurpExtender(IBurpExtender, IContextMenuFactory, ITab):
     def registerExtenderCallbacks(self, callbacks):
         self._callbacks = callbacks
         self._helpers = callbacks.getHelpers()
-        callbacks.setExtensionName("BurpAI Vulnerability Analyzer")
+        callbacks.setExtensionName("VectraForge Vulnerability Analyzer")
         callbacks.registerContextMenuFactory(self)
         self._panel = self._build_ui()
         callbacks.addSuiteTab(self)
-        self._log("BurpAI loaded. Server: " + BURPAI_URL)
+        self._log("VectraForge loaded. Server: " + BURPAI_URL)
 
     # --- ITab ----------------------------------------------------------------
 
     def getTabCaption(self):
-        return "BurpAI"
+        return "VectraForge"
 
     def getUiComponent(self):
         return self._panel
@@ -63,7 +63,7 @@ class BurpExtender(IBurpExtender, IContextMenuFactory, ITab):
             invocation.CONTEXT_TARGET_SITE_MAP_TREE,
         ]
         if ctx in valid:
-            item = JMenuItem("Analyze with BurpAI")
+            item = JMenuItem("Analyze with VectraForge")
             item.addActionListener(
                 lambda e: threading.Thread(
                     target=self._analyze_request,
@@ -90,7 +90,7 @@ class BurpExtender(IBurpExtender, IContextMenuFactory, ITab):
             is_https = service.getProtocol().lower() == "https"
             target_host = service.getHost()
 
-            self._log("Sending request to BurpAI: " + str(request_info.getUrl()))
+            self._log("Sending request to VectraForge: " + str(request_info.getUrl()))
             self._set_status("Analyzing... please wait")
 
             payload = json.dumps({
@@ -198,7 +198,7 @@ class BurpExtender(IBurpExtender, IContextMenuFactory, ITab):
         # Summary tab
         summary = []
         summary.append("=" * 60)
-        summary.append("  BurpAI Analysis Report")
+        summary.append("  VectraForge Analysis Report")
         summary.append("=" * 60)
         summary.append("URL:         " + url)
         summary.append("Method:      " + result.get("method", "?"))
@@ -278,7 +278,7 @@ class BurpExtender(IBurpExtender, IContextMenuFactory, ITab):
         )
 
     def _log(self, msg):
-        self._callbacks.printOutput("[BurpAI] " + str(msg))
+        self._callbacks.printOutput("[VectraForge] " + str(msg))
         try:
             current = self._log_area.getText()
             self._log_area.setText(current + "\n" + str(msg))

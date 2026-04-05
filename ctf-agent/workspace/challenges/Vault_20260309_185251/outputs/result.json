@@ -1,0 +1,6 @@
+{
+  "challenge": "Vault",
+  "category": "reverse",
+  "flag": "flag{vault_key_found_here}**",
+  "memory_summary": "=== AGENT MEMORY SUMMARY ===\n\n[META]\n  \u2022 tool_catalog: Available tools:  [CRYPTO]   analyze_cipher(ciphertext: string) \u2014 Full analysis of ciphertext: encoding, IoC, auto-decod\n  \u2022 workspace: workspace/challenges/Vault_20260309_185251\n\n[ARTIFACT]\n  \u2022 ./xmas_challenge: challenge file\n\n[FLAG CANDIDATES]\n  \u2605 flag{vault_key_found_here}"
+}
